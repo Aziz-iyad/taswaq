@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:taswaq/Model/Order.dart';
+import 'package:taswaq/MyWidget/BNP.dart';
 import 'package:taswaq/MyWidget/myButton.dart';
 import 'package:taswaq/acceptance.dart';
 import 'package:taswaq/helpers/db_helper.dart';
 import 'package:taswaq/refusal.dart';
+import 'package:taswaq/screens/homeScreen.dart';
+import 'package:taswaq/screens/ordersScreen.dart';
 
 class InvoiceDetails extends StatefulWidget {
+  String userName;
   int id;
-  InvoiceDetails({this.id});
+  InvoiceDetails({this.id, this.userName});
   @override
   _InvoiceDetailsState createState() => _InvoiceDetailsState();
 }
@@ -61,7 +65,10 @@ class _InvoiceDetailsState extends State<InvoiceDetails>
                           color: Color(0xFF4A4B4D),
                         ),
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BNP(
+                                    id: 1,
+                                  )));
                         },
                       ),
                     ],
@@ -398,7 +405,12 @@ class _InvoiceDetailsState extends State<InvoiceDetails>
                                 text_size: 16,
                                 text: "قبول الطلب",
                                 onTap: () {
-                                  print(widget.id);
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                          builder: (context) => BNP(
+                                                id: 2,
+                                              )),
+                                      (route) => false);
                                 },
                                 // => show1(),
                               ),
@@ -406,13 +418,19 @@ class _InvoiceDetailsState extends State<InvoiceDetails>
                                 height: 24,
                               ),
                               TextButton(
-                                child: Text(
-                                  "رفض الطلب",
-                                  style: TextStyle(
-                                      fontSize: 16, color: Color(0xFF6A6A6A)),
-                                ),
-                                onPressed: () => Navigator.of(context).pop(),
-                              ),
+                                  child: Text(
+                                    "رفض الطلب",
+                                    style: TextStyle(
+                                        fontSize: 16, color: Color(0xFF6A6A6A)),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) => BNP(
+                                                  id: 1,
+                                                )),
+                                        (route) => false);
+                                  }),
                             ],
                           ),
                         ),

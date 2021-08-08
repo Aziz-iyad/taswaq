@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:taswaq/Model/User.dart';
+import 'package:taswaq/MyWidget/BNP.dart';
+import '../MyWidget/myButton.dart';
 
-import 'MyWidget/myButton.dart';
+class WelcomeScreen extends StatelessWidget {
+  String userName;
+  WelcomeScreen({this.userName});
 
-class WelcomeScreen extends StatefulWidget {
-  @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
-}
-
-class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -25,7 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 height: 71,
               ),
               Text(
-                "أهلا بك أحمد إبراهيم",
+                "أهلا بك $userName ",
                 style: TextStyle(fontSize: 28, color: Color(0xFF4A4B4D)),
               ),
               SizedBox(
@@ -48,8 +47,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 color: Color(0xFFFC6011),
                 text_size: 20,
                 text_border_color: Colors.white,
-                onTap: (){
-                  Navigator.pushNamedAndRemoveUntil(context, '/bnp', (route) => false);
+                onTap: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => BNP(
+                                id: 1,
+                              )),
+                      (route) => false);
+
+                  print(userName);
                 },
               ),
               SizedBox(
@@ -60,7 +66,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   "خروج",
                   style: TextStyle(fontSize: 20, color: Color(0xFF6A6A6A)),
                 ),
-                onPressed: (){},
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/login', (route) => false);
+                },
               ),
             ],
           ),
