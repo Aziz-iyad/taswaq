@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:taswaq/Model/Balance.dart';
+import 'package:taswaq/Model/Order.dart';
+import 'package:taswaq/helpers/db_helper.dart';
 
-import 'MyWidget/myButton.dart';
+import '../MyWidget/myButton.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
+
 const double kDefaultPadding = 20.0;
+
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
@@ -31,17 +36,29 @@ class _LoginScreenState extends State<LoginScreen> {
                           bottomRight: Radius.circular(15),
                           bottomLeft: Radius.circular(15),
                         )),
-                    child: Image.asset('assets/images/BackgroundObjects.png',fit: BoxFit.cover,),
+                    child: Image.asset(
+                      'assets/images/BackgroundObjects.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   Positioned(
                       left: 0,
                       bottom: 0,
                       //بتقدر من هان تنزل الدائرة اكتر او اقل
                       right: 0,
-                      child: CircleAvatar(
-                        radius: 70,
-                        backgroundColor: Colors.white,
-                        child: Image.asset('assets/images/logo.png',height: 204,width: 220,),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/admin');
+                        },
+                        child: CircleAvatar(
+                          radius: 70,
+                          backgroundColor: Colors.white,
+                          child: Image.asset(
+                            'assets/images/logo.png',
+                            height: 204,
+                            width: 220,
+                          ),
+                        ),
                       )),
                 ],
               ),
@@ -49,15 +66,17 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 30,
             ),
-            Text("تسجيل دخول",
-              style: TextStyle(fontSize: 30, color: Color(0xFF4A4B4D)),),
+            Text(
+              "تسجيل دخول",
+              style: TextStyle(fontSize: 30, color: Color(0xFF4A4B4D)),
+            ),
             SizedBox(
               height: 30,
             ),
             Container(
               alignment: Alignment.center,
               height: 56,
-              margin: EdgeInsets.only(left: 34,right: 34,bottom: 28),
+              margin: EdgeInsets.only(left: 34, right: 34, bottom: 28),
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 color: Color(0xFFF2F2F2),
@@ -65,22 +84,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(50),
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.only(start: 15,end:10),
+                padding: const EdgeInsetsDirectional.only(start: 15, end: 10),
                 child: TextField(
                   cursorColor: Colors.black,
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(fontSize: 14,color: Color(0xFFB6B7B7)),
+                      hintStyle:
+                          TextStyle(fontSize: 14, color: Color(0xFFB6B7B7)),
                       focusedBorder: InputBorder.none,
                       border: InputBorder.none,
-                      hintText: "اسم المستخدم"
-                  ),
+                      hintText: "اسم المستخدم"),
                 ),
               ),
             ),
             Container(
               alignment: Alignment.center,
               height: 56,
-              margin: EdgeInsets.only(left: 34,right: 34,bottom: 28),
+              margin: EdgeInsets.only(left: 34, right: 34, bottom: 28),
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 color: Color(0xFFF2F2F2),
@@ -88,15 +107,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(50),
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.only(start: 15,end:10),
+                padding: const EdgeInsetsDirectional.only(start: 15, end: 10),
                 child: TextField(
                   cursorColor: Colors.black,
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(fontSize: 14,color: Color(0xFFB6B7B7)),
+                      hintStyle:
+                          TextStyle(fontSize: 14, color: Color(0xFFB6B7B7)),
                       focusedBorder: InputBorder.none,
                       border: InputBorder.none,
-                      hintText: "كلمة المرور"
-                  ),
+                      hintText: "كلمة المرور"),
                 ),
               ),
             ),
@@ -108,8 +127,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Color(0xFFFC6011),
                 text_size: 18,
                 text_border_color: Colors.white,
-                onTap: (){
-                  Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
+                onTap: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/welcome', (route) => false);
                 },
               ),
             ),
@@ -119,6 +139,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-
-
